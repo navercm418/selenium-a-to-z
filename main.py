@@ -1,9 +1,7 @@
-#!python3
+from myutils import zvFileUtil
+import sqlite3
+import sys
+import os
 
-from selenium import webdriver
 
-zvDrvPath = 'chromedriver.exe'
-zvDriver = webdriver.Chrome(zvDrvPath)
-
-zvDriver.get("https://login.ezproxy.bpl.org/login?url=https://www.atozdatabases.com/search")
 
