@@ -62,12 +62,69 @@ except:
 print('***', zvTotRes, 'RECORDS', zvTotPgs,'PAGES FOUND ***')
 # ------------------------------------------------------------------------------------------------------------
 
+# ---- GetRes Def ----
+def GetRes(blks):
+
+    global zvCtyStr
+
+    _totblk = blks + 4
+    _curblk = 4
+
+    while  _curblk <= _totblk:
+
+        _blkstr = str(_curblk)
+
+        print("on block:", _curblk)        
+
+        zvUprCtySt = zvCtyStr.upper()
+        zvBoxCtySt = zvDriver.find_element_by_xpath(r"/html/body/div[3]/div/div[2]/div["+ _blkstr +r"]/div[1]/div[1]/div[3]/span[2]").text
+        zvBoxCtySt = str(zvBoxCtySt)
+        zvBoxCtySt = zvBoxCtySt.upper()
+
+        print('city:', zvBoxCtySt, r"/html/body/div[3]/div/div[2]/div["+ _blkstr +r"]/div[1]/div[1]/div[3]/span[2]")
+
+        if zvUprCtySt == zvBoxCtySt:
+            print("CLICK:", r"/html/body/div[3]/div/div[2]/div["+ _blkstr +r"]/div[1]/div[2]/a")
+            zvDriver.find_element_by_xpath(r"/html/body/div[3]/div/div[2]/div["+ _blkstr +r"]/div[1]/div[2]/a").click()
+
+            zvCurName = zvDriver.find_element_by_xpath(r'//*[@id="personDetails"]/div[1]/div/span[1]').text
+            zvCurAddr = zvDriver.find_element_by_xpath(r'//*[@id="personDetails"]/div[4]/div[2]').text
+            zvCurPhns = zvDriver.find_element_by_xpath(r'//*[@id="personDetails"]/div[6]/div[2]').text
+
+            zvCurAddr = str(zvCurAddr)
+            zvCurAddr = zvCurAddr.split("Current Address")[1]
+            zvCurAddr = zvCurAddr.split("Map")[0]
+
+            zvCurPhns = str(zvCurPhns)
+            zvCurPhns = zvCurPhns.split("Phone Numbers")[1]
+            zvCurPhns = zvCurPhns.split("View All Phone Numbers")[0]
+
+            zvOut = zvCurName +' - '+ zvCurAddr +' - '+ zvCurPhns
+
+            zvFileUtil('test.txt', 'a', zvOut)
+
+            zvDriver.execute_script("window.history.go(-1)")
+
+        else:
+            print("doesnt match")
+
+        _curblk = _curblk + 1
+
+
+
 # ---- Results Loop ----
-zvBtnStrtNum = 4
-zvCurBtnNum = 0
-zvBtnClkNum = zvBtnStrtNum + zvCurBtnNum
-zvBtnClkStr = str(zvBtnClkNum)
+zvPgsLft = zvTotPgs
+zvCurPag = 1
 
-zvDriver.find_element_by_xpath(r"/html/body/div[3]/div/div[2]/div["+ zvBtnClkStr +r"]/div[1]/div[2]/a").click()
+# -- pages loop
+while zvCurPag <= zvTotPgs:
 
-zvDriver.execute_script("window.history.go(-1)")
+    print('on page:', zvCurPag)
+
+    if zvCurPag == 1:
+        GetRes(9)
+    else:
+        GetRes(10)
+
+    zvCurPag = zvCurPag + 1    
+    zvDriver.find_element_by_xpath(r'//*[@id="btnNextPage"]').click()
