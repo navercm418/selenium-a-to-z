@@ -1,4 +1,4 @@
-#!python3
+
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
@@ -13,7 +13,9 @@ zaLastName = sys.argv[1]
 zaCity = sys.argv[2]
 zaState = sys.argv[3]
 zvArgCnt = 0
-# --------------------------
+# -----------------------------------------------
+zvFilName = zaCity +'_'+ zaState +'_Results.txt'
+# -----------------------------------------------
 
 # --------------------------------------------- SETUP --------------------------------------------------------
 # -- options:
@@ -24,7 +26,8 @@ for a in sys.argv:
     if zvArgCnt > 3:
         chrome_options.add_argument(a)
     zvArgCnt = zvArgCnt + 1
-chrome_options.binary_location = r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+# chrome_options.binary_location = r"/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"
+chrome_options.binary_location = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 
 zvDrvPath = 'chromedriver.exe'
 zvDriver = webdriver.Chrome(zvDrvPath, options=chrome_options)
@@ -101,8 +104,8 @@ if zvDriver.title == 'Search | AtoZdatabases':
                     zvOut = str(zvOut)
                     zvOut = zvOut.split('Legal Name')[1]
                     zvOut = zvOut.replace('Residential Record ','')
-                    zvOut = zvOut + '\n'
-                    zvFileUtil('test.txt', 'a', zvOut)
+                    zvOut = zvOut + '\n'                    
+                    zvFileUtil(zvFilName, 'a', zvOut)
 
                 zvDriver.find_element_by_xpath(r'//*[@id="resultFormId"]/div[1]/div[1]/div[3]/div/div[1]/div[3]').click()
                 zvPgCnt = zvPgCnt + 1
@@ -114,7 +117,7 @@ if zvDriver.title == 'Search | AtoZdatabases':
             zvOut = zvOut.split('Legal Name')[1]
             zvOut = zvOut.replace('Residential Record ','')
             zvOut = zvOut + '\n'
-            zvFileUtil('test.txt', 'a', zvOut)
+            zvFileUtil(zvFilName, 'a', zvOut)
 
 # //*[@id="results_table"]
 # //*[@id="results_table"]/tbody/tr[1]
