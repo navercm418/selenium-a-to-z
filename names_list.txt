@@ -63,6 +63,7 @@ agdinaoay
 aggabao
 aglibut
 aglipay
+agnas
 agngarayngay
 agonoy
 agpalo
@@ -1426,6 +1427,7 @@ magana
 maganto
 magaoay
 magarin
+magararu
 magaso
 magat
 magayaga
