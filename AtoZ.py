@@ -1,4 +1,4 @@
-
+import os
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
@@ -7,6 +7,7 @@ import sys
 import math
 from myutils import zvFileUtil
 
+# python3 AtoZ.py '<LIST>filename</LIST>' bedford Massachusetts
 
 # ---------- Args ----------
 zaLastName = sys.argv[1]
@@ -23,10 +24,16 @@ for a in sys.argv:
     if zvArgCnt > 3:
         chrome_options.add_argument(a)
     zvArgCnt = zvArgCnt + 1
-# chrome_options.binary_location = r"/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"
-chrome_options.binary_location = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 
-zvDrvPath = 'chromedriver.exe'
+# ---------------------------------- OS ---------------------------------
+zvOs = os.name
+if zvOs == 'posix':
+    chrome_options.binary_location = r"/usr/bin/google-chrome"
+    zvDrvPath = 'lnx/chromedriver'
+else:
+    chrome_options.binary_location = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+    zvDrvPath = 'win/chromedriver.exe'
+
 zvDriver = webdriver.Chrome(zvDrvPath, options=chrome_options)
 zvDriver.get("https://login.ezproxy.bpl.org/login?url=https://www.atozdatabases.com/search")
 
@@ -41,15 +48,23 @@ zvDriver.find_element_by_xpath(r'//*[@id="post-170332"]/div/table/tbody/tr[3]/td
 # --------------------------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------------------------
 
-zvNamFileName = 'names_list2.txt'
-#zvState = 'Massachusetts'
-zvTown = 'bedford'
-zvName = ''
+# zvState = 'Massachusetts'
+# zvTown = 'bedford'
+
+if '<LIST>' in zaLastName:
+    zvNamFileName = zaLastName    
+    zvNamFileName = zvNamFileName.split('<LIST>')[1]
+    zvNamFileName = zvNamFileName.split('</LIST>')[0]
+    zvNameLst = zvFileUtil(zvNamFileName, 'r')
+    zvNameLst = zvNameLst.splitlines()
+
+else:
+    zvNameLst = [zaLastName]
+    zvNameLst = zvNameLst.splitlines()
+
 # -----------------------------------------------
-zvFilName = zvTown +'_'+ zaState +'_Results.txt'
+zvFilName = zaCity +'_'+ zaState +'_Results.txt'
 # -----------------------------------------------
-zvNameLst = zvFileUtil(zvNamFileName, 'r')
-zvNameLst = zvNameLst.splitlines()
 
 for n in zvNameLst:
 
@@ -73,7 +88,7 @@ for n in zvNameLst:
         zvLstNam.send_keys(zvName)
 
         zvCity = zvDriver.find_element_by_xpath(r'//*[@id="hpdeux_fap_city"]')    
-        zvCity.send_keys(zvTown)
+        zvCity.send_keys(zaCity)
         
         zvDriver.find_element_by_xpath(r'//*[@id="search_deux_fap"]').click()
 
