@@ -1,4 +1,5 @@
 #!python3
+import os
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
@@ -7,6 +8,7 @@ import sys
 import math
 from myutils import zvFileUtil
 
+# 
 
 # ---------- Args ----------
 zaLastName = sys.argv[1]
@@ -26,7 +28,14 @@ for a in sys.argv:
     zvArgCnt = zvArgCnt + 1
 chrome_options.binary_location = r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
 
-zvDrvPath = 'chromedriver.exe'
+zvOs = os.name
+if zvOs == 'posix':
+    chrome_options.binary_location = r"/usr/bin/google-chrome"
+    zvDrvPath = 'lnx/chromedriver'
+else:
+    chrome_options.binary_location = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+    zvDrvPath = 'win/chromedriver.exe'
+
 zvDriver = webdriver.Chrome(zvDrvPath, options=chrome_options)
 zvDriver.get("https://www.truepeoplesearch.com/")
 # ------------------------------------------------------------------------------------------------------------
