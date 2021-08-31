@@ -6,6 +6,7 @@ import time
 import sys
 import math
 from myutils import zvFileUtil
+from selenium.webdriver.common.action_chains import ActionChains
 
 # \\wsl$\Ubuntu\home\andy\CodeProjects\selenium-a-to-z spf.py '<LIST>filename</LIST>' Burlington MA
 # python3 spf.py '<LIST>filename</LIST>' Burlington MA
@@ -37,12 +38,9 @@ else:
 
 zvDriver = webdriver.Chrome(zvDrvPath, options=chrome_options)
 
-# --------------------------------- Main ------------------------------------------------------
-# https://www.searchpeoplefree.com/find/tabayoyong/ma/randolph
-zvDriver.get("https://www.searchpeoplefree.com/find/"+ zaLastName.lower() +"/"+ zaState.lower() +"/"+ zaCity.lower())
-# ------------------------------------------------------------------------------------------------------------
-
-# ---- Main page ----
+# -----------------------------------------------
+zvFilName = zaCity +'_'+ zaState +'_Results.txt'
+# -----------------------------------------------
 
 if '<LIST>' in zaLastName:
     zvNamFileName = zaLastName    
@@ -51,50 +49,120 @@ if '<LIST>' in zaLastName:
     zvNameLst = zvFileUtil(zvNamFileName, 'r')
     zvNameLst = zvNameLst.splitlines()
 
-else:
-    zvNameLst = [zaLastName]
-    zvNameLst = zvNameLst.splitlines()
+    for n in zvNameLst:
+        # https://www.searchpeoplefree.com/find/tabayoyong/ma/randolph
+        zvName = str(n)
+        zvDriver.get("https://www.searchpeoplefree.com/find/"+ zvName.lower() +"/"+ zaState.lower() +"/"+ zaCity.lower())
+        # ------------------------------------------------------------------------------------------------------------
 
-zvTotRes = zvDriver.page_source
-zvTotRes = str(zvTotRes)
+        print(n)
+        if zvDriver.title == 'Access to this page has been denied.':
+            print("press & hold")
+            time.sleep(5)
+            ActionChains(zvDriver).click_and_hold(zvDriver.find_element_by_id(r'IfNWQwCpyUSxAuj')).perform()
 
-zvCnt = 1
-zvTemp = zvTotRes.split('<article>')
-for t in zvTemp:
-    per = t.split('</article>')[0]
+        # ---- Main page ----
+        zvTotRes = zvDriver.page_source
+        zvTotRes = str(zvTotRes)
+
+        zvCnt = 1
+        zvTemp = zvTotRes.split('<article>')
+        for t in zvTemp:
+            per = t.split('</article>')[0]
+            
+            try:
+                nam = per.split('<h2 class="h2">')[1]
+                nam = nam.split('<span>in '+ zaCity.lower().capitalize() +', '+ zaState.upper() +'</span>')[0]
+                nam = nam.strip()
+
+                adr = per.split('<address>')[1]        
+                adr = adr.split('</address>')[0]
+                adr = adr.split('>')[1]
+                adr = adr.split('<')[0]
+                adr = adr.strip()
+
+                phnlst = []
+                phnout = '{'
+
+                phn = per.split('<i class="text-muted">Home telephone')[1]
+                phn = phn.split('</ul>')[0]
+                
+                phnlst = phn.split('<a href="https://www.searchpeoplefree.com/phone-lookup/')        
+
+                for i in range( len(phnlst)):
+                    phnlst[i] = phnlst[i].split('">')[0]
+                    if len(phnlst[i]) < 15:
+                        phnout = phnout + phnlst[i] + ","
+
+                phnout = phnout[:-1]
+                phnout = phnout + '}'
+
+                zvOut = 'adr: {}| nam: {}| phn: {}\n'.format(adr, nam, phnout)
+
+                if len(nam) > 50:
+                    zvOut = "*** error ***"
+                
+                print(zvOut)
+                
+                zvFileUtil(zvFilName, 'a', zvOut)
+
+                zvCnt = zvCnt + 1
+            except:
+                print("*** error ***")
+
     
-    try:
-        nam = per.split('<h2 class="h2">')[1]
-        nam = nam.split('<span>in '+ zaCity.lower().capitalize() +', '+ zaState.upper() +'</span>')[0]
-        nam = nam.strip()
 
-        adr = per.split('<address>')[1]        
-        adr = adr.split('</address>')[0]
-        adr = adr.split('>')[1]
-        adr = adr.split('<')[0]
-        adr = adr.strip()
+else:
 
-        phnlst = []
-        phnout = '{'
+    # https://www.searchpeoplefree.com/find/tabayoyong/ma/randolph
+    zvName = zaLastName
+    zvDriver.get("https://www.searchpeoplefree.com/find/"+ zvName.lower() +"/"+ zaState.lower() +"/"+ zaCity.lower())
+    # ------------------------------------------------------------------------------------------------------------
 
-        phn = per.split('<i class="text-muted">Home telephone')[1]
-        phn = phn.split('</ul>')[0]
+    print(zvName)
+
+    # ---- Main page ----
+    zvTotRes = zvDriver.page_source
+    zvTotRes = str(zvTotRes)
+
+    zvCnt = 1
+    zvTemp = zvTotRes.split('<article>')
+    for t in zvTemp:
+        per = t.split('</article>')[0]
         
-        phnlst = phn.split('<a href="https://www.searchpeoplefree.com/phone-lookup/')        
+        try:
+            nam = per.split('<h2 class="h2">')[1]
+            nam = nam.split('<span>in '+ zaCity.lower().capitalize() +', '+ zaState.upper() +'</span>')[0]
+            nam = nam.strip()
 
-        for i in range( len(phnlst)):
-            phnlst[i] = phnlst[i].split('">')[0]
-            if len(phnlst[i]) < 15:
-                phnout = phnout + phnlst[i] + ","
+            adr = per.split('<address>')[1]        
+            adr = adr.split('</address>')[0]
+            adr = adr.split('>')[1]
+            adr = adr.split('<')[0]
+            adr = adr.strip()
 
-        phnout = phnout[:-1]
-        phnout = phnout + '}'
+            phnlst = []
+            phnout = '{'
 
-        zvOut = '{}|{}|{}'.format(adr, nam, phnout)        
-        print(zvOut)
+            phn = per.split('<i class="text-muted">Home telephone')[1]
+            phn = phn.split('</ul>')[0]
+            
+            phnlst = phn.split('<a href="https://www.searchpeoplefree.com/phone-lookup/')        
 
+            for i in range( len(phnlst)):
+                phnlst[i] = phnlst[i].split('">')[0]
+                if len(phnlst[i]) < 15:
+                    phnout = phnout + phnlst[i] + ","
 
-        zvCnt = zvCnt + 1
-    except:
-        print("*** error ***")
+            phnout = phnout[:-1]
+            phnout = phnout + '}'
 
+            zvOut = '{}|{}|{}\n'.format(adr, nam, phnout)
+            
+            print(zvOut)
+            
+            zvFileUtil(zvFilName, 'a', zvOut)
+
+            zvCnt = zvCnt + 1
+        except:
+            print("*** error ***")
