@@ -7,7 +7,8 @@ import sys
 import math
 from myutils import zvFileUtil
 
-# python3 AtoZ.py '<LIST>filename</LIST>' bedford Massachusetts
+# \\wsl$\Ubuntu\home\andy\CodeProjects\selenium-a-to-z AtoZ.py '<LIST>filename</LIST>' Burlington Massachusetts
+# python3 AtoZ.py '<LIST>filename</LIST>' Burlington Massachusetts
 
 # ---------- Args ----------
 zaLastName = sys.argv[1]
@@ -34,6 +35,7 @@ else:
     chrome_options.binary_location = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
     zvDrvPath = 'win/chromedriver.exe'
 
+# --------------------------------- Main ------------------------------------------------------
 zvDriver = webdriver.Chrome(zvDrvPath, options=chrome_options)
 zvDriver.get("https://login.ezproxy.bpl.org/login?url=https://www.atozdatabases.com/search")
 

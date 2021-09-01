@@ -58,8 +58,17 @@ if '<LIST>' in zaLastName:
         print(n)
         if zvDriver.title == 'Access to this page has been denied.':
             print("press & hold")
-            time.sleep(5)
-            ActionChains(zvDriver).click_and_hold(zvDriver.find_element_by_id(r'IfNWQwCpyUSxAuj')).perform()
+            time.sleep(7)
+
+            #zvTmpPg = ''
+            #zvTmpPg = zvDriver.page_source            
+
+            #zvElId = zvDriver.find_element_by_id('px-captcha')
+
+            #ActionChains(zvDriver).click_and_hold(zvElId).perform()
+            #time.sleep(5)
+            #print('holding', zvElId)
+            #ActionChains(zvDriver).release(zvElId).perform()
 
         # ---- Main page ----
         zvTotRes = zvDriver.page_source
@@ -97,12 +106,13 @@ if '<LIST>' in zaLastName:
                 phnout = phnout[:-1]
                 phnout = phnout + '}'
 
-                zvOut = 'adr: {}| nam: {}| phn: {}\n'.format(adr, nam, phnout)
+                zvOut = '{}|{}|{}'.format(adr, nam, phnout)
+                zvOut = zvOut + '\n'
 
                 if len(nam) > 50:
-                    zvOut = "*** error ***"
+                    zvOut = ""
                 
-                print(zvOut)
+                #print(zvOut)
                 
                 zvFileUtil(zvFilName, 'a', zvOut)
 
@@ -157,9 +167,8 @@ else:
             phnout = phnout[:-1]
             phnout = phnout + '}'
 
-            zvOut = '{}|{}|{}\n'.format(adr, nam, phnout)
-            
-            print(zvOut)
+            zvOut = '{}|{}|{}'.format(adr, nam, phnout)
+            zvOut = zvOut = '\n'
             
             zvFileUtil(zvFilName, 'a', zvOut)
 
