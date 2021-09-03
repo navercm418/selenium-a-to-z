@@ -8,7 +8,7 @@ import math
 from myutils import zvFileUtil
 
 # \\wsl$\Ubuntu\home\andy\CodeProjects\selenium-a-to-z AtoZ.py '<LIST>filename</LIST>' Burlington Massachusetts
-# python3 AtoZ.py '<LIST>filename</LIST>' Burlington Massachusetts
+# python.exe AtoZ.py '<LIST>filename</LIST>' Burlington Massachusetts
 
 # ---------- Args ----------
 zaLastName = sys.argv[1]
@@ -18,8 +18,7 @@ zvArgCnt = 0
 
 # --------------------------------------------- SETUP --------------------------------------------------------
 # -- options:
-#   --headless
-#   log-level=3
+#   --headless log-level=3
 chrome_options = Options()
 for a in sys.argv:
     if zvArgCnt > 3:
@@ -45,7 +44,7 @@ password = zvDriver.find_element_by_name("pass")
 username.send_keys("20000001303814")
 password.send_keys("1234")
 
-zvDriver.find_element_by_xpath(r'//*[@id="post-170332"]/div/table/tbody/tr[3]/td[2]/input').click()
+zvDriver.find_element_by_xpath(r'/html/body/section/div[3]/div/div[3]/div/div/article/div/table/tbody/tr[3]/td[2]/input').click()
 
 # --------------------------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------------------------
@@ -154,8 +153,3 @@ for n in zvNameLst:
                 zvOut = zvOut.replace('Residential Record ','')
                 zvOut = zvOut + '\n'
                 zvFileUtil(zvFilName, 'a', zvOut)
-
-# //*[@id="results_table"]
-# //*[@id="results_table"]/tbody/tr[1]
-# //*[@id="results_table"]/tbody/tr[2]
-# //*[@id="results_table"]/tbody/tr[3]
