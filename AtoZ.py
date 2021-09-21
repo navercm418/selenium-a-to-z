@@ -7,7 +7,7 @@ import sys
 import math
 from myutils import zvFileUtil
 
-# \\wsl$\Ubuntu\home\andy\CodeProjects\selenium-a-to-z AtoZ.py '<LIST>filename</LIST>' Burlington Massachusetts
+# \\wsl$\Ubuntu\home\andy\CodeProjects\selenium-a-to-z AtoZ.py '<LIST>top5names.txt</LIST>' Bedford Massachusetts
 # python.exe AtoZ.py '<LIST>names_list.txt</LIST>' Malden Massachusetts --headless log-level=3
 # started 4:10pm
 

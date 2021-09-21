@@ -27,6 +27,7 @@ def zvFileUtil(file, action, data=None):
 #   --headless log-level=3
 chrome_options = Options()
 chrome_options.add_argument('log-level=3')
+chrome_options.add_argument('--headless')
 
 # ---------------------------------- OS ---------------------------------
 zvOs = os.name
@@ -49,6 +50,10 @@ zvTownLst = zvFileUtil("dist_in.txt", "r")
 zvTownLst = zvTownLst.splitlines()
 for t in zvTownLst:
     _town = str(t)
+    print(_town)
     zvDriver.get(r"https://www.google.com/maps/dir/"+ _town +r"/559+Pine+St,+Lowell,+MA+01851")
+    # /html/body/div[3]/div[9]/div[8]/div/div[1]/div/div/div[5]/div[1]/div/div[1]/div[1]/div[1]/span[1]
+    zvDist = zvDriver.find_element_by_xpath(r'/html/body/div[3]/div[9]/div[8]/div/div[1]/div/div/div[5]/div[1]/div/div[1]/div[1]/div[1]/span[1]').text
+    zvFileUtil("dist_ou.txt", "a", _town +'~'+ str(zvDist) +'\n')
 
 
