@@ -1823,6 +1823,7 @@ palacpac
 palad
 palag
 palaganas
+palana
 palangan
 palangdao
 palapal
@@ -2100,6 +2101,7 @@ sampang
 sampayan
 sampilo
 samporna
+samonte
 sanga
 sangalang
 sangil
