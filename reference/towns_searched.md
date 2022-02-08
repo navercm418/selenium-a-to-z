@@ -7,8 +7,8 @@
 - [x] Burlington
 - [x] Lowell
 - [x] Chelmsford
-- [o] Westford
-- [o] Tewksbury
+- [o] Westford pagliaro
+- [o] Tewksbury pagliaro
 - [o] Dracut tabo
 - [ ] Tyngsborough
 - [ ] Littleton
