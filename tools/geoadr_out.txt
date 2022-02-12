@@ -1,0 +1,24 @@
+1|504 Warren St, Dorchester, MA|42.3143785|-71.0856017|02121
+1|95 Intervale St, Dorchester, MA|02121|42.3103487|-71.0772306
+1|424 Ashmont St, Dorchester, MA|02124|42.288265|-71.0557547
+1|81 Columbia Rd, Dorchester, MA|02121|42.3044047|-71.0814489
+1|24 Avondale St, Dorchester, MA|02124|42.2745849|-71.0690324
+1|455 Geneva Ave, Dorchester, MA|02122|42.299768|-71.065455
+1|612 Adams St, Dorchester, MA|02122|42.2889814|-71.0554591
+1|50 Delano St, Dorchester, MA|02122|42.303646|-71.0694235
+1|5 Odonnell Ter, Dorchester, MA|02122|42.2944788|-71.0600812
+1|31 Rugdale Rd, Dorchester , MA|02124|42.2762752|-71.0679689
+1|7 Granville St, Dorchester , MA|02124|42.2821326|-71.0571188
+1|486 Warren St, Dorchester , MA|02121|42.314617|-71.083478
+1|43 Semont Rd, Dorchester , MA|02124|42.2908367|-71.0611075
+1|2 Beauford Ln, Dorchester , MA|02125|42.3164487|-71.0766206
+1|486 Warren St, Dorchester, MA|02121|42.314617|-71.083478
+1|9 Bowman St, Dorchester, MA|42.2873304|-71.0503642|02122
+1|159 Sydney St, Dorchester, MA|02125|42.3168951|-71.0524184
+1|24 Holborn St, Dorchester, MA|42.3148871|-71.0835469|02121
+1|319 Geneva Ave, Dorchester, MA|02212|42.3029785|-71.071022
+1|11 Marsh St, Dorchester, MA|02124|42.2829042|-71.0487617
+1|87 Westville St, Dorchester, MA|02124|42.30078|-71.0698152
+1|21 Peacevale Rd, Dorchester, MA|02124|42.2876966|-71.0766773
+1|157 E Cottage St, Dorchester, MA|02125|42.320662|-71.0627529
+1|4 Harley St, Dorchester, MA|01210|42.288008|-71.069155

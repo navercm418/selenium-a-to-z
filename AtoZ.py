@@ -19,7 +19,7 @@ zvArgCnt = 0
 
 # --------------------------------------------- SETUP --------------------------------------------------------
 # -- options:
-#   --headless log-level=3
+# --headless log-level=3
 chrome_options = Options()
 for a in sys.argv:
     if zvArgCnt > 3:
