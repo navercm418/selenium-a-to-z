@@ -1,24 +1,6 @@
 ## <u><b>Town Search List</b></u>
 
 ### 20 Minutes From Kingdom Hall
-<<<<<<< HEAD
-- [x] Bedford (MA)
-- [x] Billerica (MA)
-- [x] Carlisle (MA)
-- [x] Burlington (MA)
-- [x] Lowell (MA)
-- [x] Chelmsford (MA)
-- [x] Westford (MA)
-- [x] Tewksbury (MA)
-- [x] Dracut (MA)
-- [x] Tyngsborough (MA)
-- [x] Littleton (MA)
-- [x] Dunstable (MA)
-- [x] Andover (MA)
-- [x] Lawrence (MA)
-- [x] Methuen (MA)
-- [1] Pelham (NH)
-=======
 - [x] Bedford
 - [x] Billerica
 - [x] Carlisle
@@ -35,7 +17,6 @@
 - [x] Lawrence
 - [x] Methuen
 - [x] Pelham (NH)
->>>>>>> 6fe4dbca151830608ffc0073e5f9e92a498c1b24
 
 ### 30 Minutes From Kingdom Hall
 - [0] Acton (MA)
