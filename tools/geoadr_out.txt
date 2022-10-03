@@ -1,0 +1,46 @@
+1|4 Newport Cir, Andover, MA|01810|42.639028|-71.212365
+1|35 Marilyn Rd, Andover, MA|01810|42.663935|-71.155636
+1|202 River Rd, Andover, MA|01810|42.68291|-71.216219
+1|405 S Main St, Andover, MA|01810|42.621444|-71.12628
+1|111 Greenwood Rd, Andover, MA|01810|42.661842|-71.187686
+1|39 Gould Rd, Andover, MA|01810|42.608309|-71.118262
+1|9 Copley Dr, Andover, MA|01810|42.619883|-71.173035
+1|43 Wildwood Rd, Andover, MA|01810|42.627173|-71.119552
+1|237 N Main St, Andover, MA|01810|42.665543|-71.145963
+1|194 River Rd, Andover, MA|01810|42.68377|-71.216054
+1|4 Highland Ave, Bedford, MA|01730|42.486592|-71.280782
+1|1 Warren Ave, Bedford, MA|01730|42.486504|-71.296139
+1|46 Roberts Dr, Bedford, MA|01730|42.485951|-71.267812
+1|31 Winterberry Way, Bedford, MA|01730|42.49838|-71.302889
+1|2 Clarks Ct, Bedford, MA||||orig
+1|16 Sweeney Ridge Rd, Bedford, MA|01730|42.507874|-71.261229
+1|3 Scott Rd, Bedford, MA|01731|42.453829|-71.268287
+1|701 Boston Rd, Billerica, MA|01821|42.535624|-71.240974
+1|17 Ichabod Ln, Billerica, MA|01821|42.560594|-71.244157
+1|14 Hamilton Ave, Billerica, MA|01821|42.525448|-71.233821
+1|51 Wildcrest Ave, Billerica, MA|01821|42.523264|-71.231484
+1|228 PO BOX, Billerica, MA||||orig
+1|14 Autumn St, Billerica, MA|01821|42.532064|-71.232786
+1|429 Boston Rd, Bellerica, MA|01821|42.55583|-71.267094
+1|21 Wildcrest Ave, Billerica, MA|01821|42.524356|-71.234081
+1|2 Margaret Ln, Billerica, MA|01821|42.559406|-71.233567
+1|14 Larkspur Rd, Billerica, MA|01821|42.566905|-71.218291
+1|11 Hawks Ridge Rd, Billerica, MA|01862|42.558866|-71.317348
+1|102 Concord Rd, Billerica, MA|01821|42.551182|-71.27296
+1|25 Kenmar Dr, Billerica, MA|01821|42.550215|-71.267716
+1|10 N Rexhame St, North Billerica, MA|01862|42.548974|-71.301253
+1|815 Boston Rd, Billerica, MA||||err
+1|9 Anthony Ln, Billerica, MA|01821|42.537428|-71.244908
+1|6 Allen Rd Ext, Billerica, MA|01821|42.564713|-71.253403
+1|245 River St Ext, Billerica, MA|01821|42.558463|-71.294976
+1|45 Chelmsford Rd, North Billerica, MA|01862|42.584896|-71.299877
+1|6 Weathervane Rd, Billerica, MA|01821|42.529301|-71.246816
+1|1 Laing Circle, Burlington, MA|01803|42.520762|-71.195471
+1|31 Baron Park Lane, Burlington, MA|01803|42.499269|-71.22732
+1|11 Baron Park Lane, Burlington, MA|01803|42.498406|-71.221045
+1|6 Hearthstone Dr, Burlington, MA|01803|42.495933|-71.182088
+1|17 Greystone Ct, Burlington, MA|01803|42.505332|-71.170998
+1|46 Peach Orchard Rd, Burlington, MA||||err
+1|4 Oak St, Burlington, MA|01803|42.504023|-71.178258
+1|153 Wilmington Rd, Burlington, MA|01803|42.53877|-71.201196
+1|617 Farms Dr, Burlington, MA|01803|42.503383|-71.19353
