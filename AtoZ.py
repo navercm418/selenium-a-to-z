@@ -13,9 +13,6 @@ zaLastName = sys.argv[1]
 zaCity = sys.argv[2]
 zaState = sys.argv[3]
 zvArgCnt = 0
-# -----------------------------------------------
-zvFilName = zaCity +'_'+ zaState +'_Results.txt'
-# -----------------------------------------------
 
 # --------------------------------------------- SETUP --------------------------------------------------------
 # -- options:
@@ -41,83 +38,105 @@ password.send_keys("1234")
 
 zvDriver.find_element_by_xpath(r'//*[@id="post-170332"]/div/table/tbody/tr[3]/td[2]/input').click()
 
-if zvDriver.title == 'Session Timed Out | AtoZdatabases':
-    zvDriver.find_element_by_xpath(r'//*[@id="total-wrapper"]/div/div/div/p/a').click()
-    
-# ---------------------------------------------- SEARCH ------------------------------------------------------
-if zvDriver.title == 'Search | AtoZdatabases':
-    
-    zvState = Select(zvDriver.find_element_by_xpath(r'//*[@id="hpdeux_fap_state"]'))
-    zvState.select_by_visible_text(zaState)
+# --------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------
 
-    zvLstNam = zvDriver.find_element_by_xpath(r'//*[@id="hpdeux_fap_ln"]')
-    zvLstNam.send_keys(zaLastName)
+zvNamFileName = 'names_list2.txt'
+#zvState = 'Massachusetts'
+zvTown = 'bedford'
+zvName = ''
+# -----------------------------------------------
+zvFilName = zvTown +'_'+ zaState +'_Results.txt'
+# -----------------------------------------------
+zvNameLst = zvFileUtil(zvNamFileName, 'r')
+zvNameLst = zvNameLst.splitlines()
 
-    zvCity = zvDriver.find_element_by_xpath(r'//*[@id="hpdeux_fap_city"]')    
-    zvCity.send_keys(zaCity)
-    
-    zvDriver.find_element_by_xpath(r'//*[@id="search_deux_fap"]').click()
+for n in zvNameLst:
 
-    time.sleep(5)
+    zvDriver.get("https://login.ezproxy.bpl.org/login?url=https://www.atozdatabases.com/search")
 
-# ---------------------------------------------- RESULTS ------------------------------------------------------
-    try:
-        zvPopUp = zvDriver.find_element_by_xpath(r'//*[@id="deux_error-dialog"]')        
-        print('*** NO RECORDS FOUND ***')
-    except:
+    time.sleep(1)
 
-        zvCnt = zvDriver.find_element_by_xpath(r'//*[@id="total_records"]')
-        zvCnt = zvCnt.text
-        zvCnt = int(zvCnt)
-        print('***', zvCnt, 'RECORDS FOUND ***')
+    zvName = n
+    print(zvName)
 
-        if zvCnt > 25:
-            zvPerPg = Select(zvDriver.find_element_by_xpath(r'//*[@id="recordFilter"]'))
-            zvPerPg.select_by_visible_text('100')
+    if zvDriver.title == 'Session Timed Out | AtoZdatabases':
+        zvDriver.find_element_by_xpath(r'//*[@id="total-wrapper"]/div/div/div/p/a').click()
+        
+    # ---------------------------------------------- SEARCH ------------------------------------------------------
+    if zvDriver.title == 'Search | AtoZdatabases':
+        
+        zvState = Select(zvDriver.find_element_by_xpath(r'//*[@id="hpdeux_fap_state"]'))
+        zvState.select_by_visible_text(zaState)
 
-            zvPgs = zvCnt / 100
-            zvPgs = math.ceil(zvPgs)
+        zvLstNam = zvDriver.find_element_by_xpath(r'//*[@id="hpdeux_fap_ln"]')
+        zvLstNam.send_keys(zvName)
 
-            zvPgCnt = 1
+        zvCity = zvDriver.find_element_by_xpath(r'//*[@id="hpdeux_fap_city"]')    
+        zvCity.send_keys(zvTown)
+        
+        zvDriver.find_element_by_xpath(r'//*[@id="search_deux_fap"]').click()
 
-            while zvPgCnt <= zvPgs:
-                
-                time.sleep(5)
+        time.sleep(5)
 
-                try:
+    # ---------------------------------------------- RESULTS ------------------------------------------------------
+        try:
+            zvPopUp = zvDriver.find_element_by_xpath(r'//*[@id="deux_error-dialog"]')        
+            print('*** NO RECORDS FOUND ***')
+        except:
+
+            zvCnt = zvDriver.find_element_by_xpath(r'//*[@id="total_records"]')
+            zvCnt = zvCnt.text
+            zvCnt = int(zvCnt)
+            print('***', zvCnt, 'RECORDS FOUND ***')
+
+            if zvCnt > 25:
+                zvPerPg = Select(zvDriver.find_element_by_xpath(r'//*[@id="recordFilter"]'))
+                zvPerPg.select_by_visible_text('100')
+
+                zvPgs = zvCnt / 100
+                zvPgs = math.ceil(zvPgs)
+
+                zvPgCnt = 1
+
+                while zvPgCnt <= zvPgs:
                     
-                    zvDriver.find_element_by_xpath(r'/html/body/div[3]/div[1]/a').click()
-                    
-                    zvResTab = zvDriver.find_element_by_xpath(r'//*[@id="results_table"]')
-                    zvOut = zvResTab.text
-                    zvOut = str(zvOut)
-                    zvOut = zvOut.split('Legal Name')[1]
-                    zvOut = zvOut.replace('Residential Record ','')
-                    zvOut = zvOut + '\n'
-                    zvFileUtil('test.txt', 'a', zvOut)
+                    time.sleep(5)
 
-                except:
-                    
-                    zvResTab = zvDriver.find_element_by_xpath(r'//*[@id="results_table"]')
-                    
-                    zvOut = zvResTab.text
-                    zvOut = str(zvOut)
-                    zvOut = zvOut.split('Legal Name')[1]
-                    zvOut = zvOut.replace('Residential Record ','')
-                    zvOut = zvOut + '\n'                    
-                    zvFileUtil(zvFilName, 'a', zvOut)
+                    try:
+                        
+                        zvDriver.find_element_by_xpath(r'/html/body/div[3]/div[1]/a').click()
+                        
+                        zvResTab = zvDriver.find_element_by_xpath(r'//*[@id="results_table"]')
+                        zvOut = zvResTab.text
+                        zvOut = str(zvOut)
+                        zvOut = zvOut.split('Legal Name')[1]
+                        zvOut = zvOut.replace('Residential Record ','')
+                        zvOut = zvOut + '\n'
+                        zvFileUtil('test.txt', 'a', zvOut)
 
-                zvDriver.find_element_by_xpath(r'//*[@id="resultFormId"]/div[1]/div[1]/div[3]/div/div[1]/div[3]').click()
-                zvPgCnt = zvPgCnt + 1
+                    except:
+                        
+                        zvResTab = zvDriver.find_element_by_xpath(r'//*[@id="results_table"]')
+                        
+                        zvOut = zvResTab.text
+                        zvOut = str(zvOut)
+                        zvOut = zvOut.split('Legal Name')[1]
+                        zvOut = zvOut.replace('Residential Record ','')
+                        zvOut = zvOut + '\n'                    
+                        zvFileUtil(zvFilName, 'a', zvOut)
 
-        else:
-            zvResTab = zvDriver.find_element_by_xpath(r'//*[@id="results_table"]')
-            zvOut = zvResTab.text
-            zvOut = str(zvOut)
-            zvOut = zvOut.split('Legal Name')[1]
-            zvOut = zvOut.replace('Residential Record ','')
-            zvOut = zvOut + '\n'
-            zvFileUtil(zvFilName, 'a', zvOut)
+                    zvDriver.find_element_by_xpath(r'//*[@id="resultFormId"]/div[1]/div[1]/div[3]/div/div[1]/div[3]').click()
+                    zvPgCnt = zvPgCnt + 1
+
+            else:
+                zvResTab = zvDriver.find_element_by_xpath(r'//*[@id="results_table"]')
+                zvOut = zvResTab.text
+                zvOut = str(zvOut)
+                zvOut = zvOut.split('Legal Name')[1]
+                zvOut = zvOut.replace('Residential Record ','')
+                zvOut = zvOut + '\n'
+                zvFileUtil(zvFilName, 'a', zvOut)
 
 # //*[@id="results_table"]
 # //*[@id="results_table"]/tbody/tr[1]
