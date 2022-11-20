@@ -7,8 +7,8 @@ import sys
 import math
 from myutils import zvFileUtil
 
-# \\wsl$\Ubuntu\home\andy\CodeProjects\selenium-a-to-z AtoZ.py '<LIST>top5names.txt</LIST>' Bedford Massachusetts
-# python.exe AtoZ.py '<LIST>names_list.txt</LIST>' Malden Massachusetts --headless log-level=3
+# \\wsl.localhost\Ubuntu-20.04\home\andy\CodeProjects\selenium-a-to-z AtoZ.py '<LIST>top5names.txt</LIST>' Bedford Massachusetts
+# python.exe AtoZ.py '<LIST>names/names_list.txt</LIST>' Brockton Massachusetts --headless log-level=3
 # started 4:10pm
 
 # ---------- Args ----------
@@ -50,46 +50,6 @@ zvDriver.find_element_by_xpath(r'/html/body/section/div[3]/div/div[3]/div/div/ar
 # --------------------------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------------------------
 
-<<<<<<< HEAD
-zvNamFileName = 'names_list2.txt'
-#zvState = 'Massachusetts'
-zvTown = 'bedford'
-zvName = ''
-# -----------------------------------------------
-zvFilName = zvTown +'_'+ zaState +'_Results.txt'
-# -----------------------------------------------
-zvNameLst = zvFileUtil(zvNamFileName, 'r')
-zvNameLst = zvNameLst.splitlines()
-
-for n in zvNameLst:
-
-    zvDriver.get("https://login.ezproxy.bpl.org/login?url=https://www.atozdatabases.com/search")
-
-    time.sleep(1)
-
-    zvName = n
-    print(zvName)
-
-    if zvDriver.title == 'Session Timed Out | AtoZdatabases':
-        zvDriver.find_element_by_xpath(r'//*[@id="total-wrapper"]/div/div/div/p/a').click()
-        
-    # ---------------------------------------------- SEARCH ------------------------------------------------------
-    if zvDriver.title == 'Search | AtoZdatabases':
-        
-        zvState = Select(zvDriver.find_element_by_xpath(r'//*[@id="hpdeux_fap_state"]'))
-        zvState.select_by_visible_text(zaState)
-
-        zvLstNam = zvDriver.find_element_by_xpath(r'//*[@id="hpdeux_fap_ln"]')
-        zvLstNam.send_keys(zvName)
-
-        zvCity = zvDriver.find_element_by_xpath(r'//*[@id="hpdeux_fap_city"]')    
-        zvCity.send_keys(zvTown)
-        
-        zvDriver.find_element_by_xpath(r'//*[@id="search_deux_fap"]').click()
-
-        time.sleep(5)
-
-=======
 # zvState = 'Massachusetts'
 # zvTown = 'bedford'
 
@@ -223,7 +183,6 @@ else:
 
         time.sleep(5)
 
->>>>>>> 870fcc5d95f97f22b3651d643bb25f6d5a0c14c8
     # ---------------------------------------------- RESULTS ------------------------------------------------------
         try:
             zvPopUp = zvDriver.find_element_by_xpath(r'//*[@id="deux_error-dialog"]')        
@@ -232,15 +191,11 @@ else:
 
             zvCnt = zvDriver.find_element_by_xpath(r'//*[@id="total_records"]')
             zvCnt = zvCnt.text
-<<<<<<< HEAD
-            zvCnt = int(zvCnt)
-=======
             try:
                 zvCnt = int(zvCnt)
             except:
                 zvCnt = '?'
 
->>>>>>> 870fcc5d95f97f22b3651d643bb25f6d5a0c14c8
             print('***', zvCnt, 'RECORDS FOUND ***')
 
             if zvCnt > 25:
@@ -290,11 +245,8 @@ else:
                 zvOut = zvOut.replace('Residential Record ','')
                 zvOut = zvOut + '\n'
                 zvFileUtil(zvFilName, 'a', zvOut)
-<<<<<<< HEAD
 
 # //*[@id="results_table"]
 # //*[@id="results_table"]/tbody/tr[1]
 # //*[@id="results_table"]/tbody/tr[2]
 # //*[@id="results_table"]/tbody/tr[3]
-=======
->>>>>>> 870fcc5d95f97f22b3651d643bb25f6d5a0c14c8
